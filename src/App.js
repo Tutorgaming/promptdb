@@ -1,10 +1,9 @@
 import React from "react";
 
 //React Components
-import JumboQuote from "./components/JumboQuote.js"
-import QuizGame from "./components/QuizGame.js";
-import FooterBar from "./components/FooterBar.js"
+import MainEntry from "./components/MainEntry.js"
 import { Col } from 'react-bootstrap';
+
 
 // Main App
 class App extends React.Component {
@@ -16,8 +15,7 @@ class App extends React.Component {
   render() {
     return (
       <div className = "container" >
-          <JumboQuote />
-          <QuizGame/>
+          <MainEntry/>
       </div>
     );
   }
