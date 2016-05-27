@@ -18,7 +18,7 @@ class CardContainer extends React.Component {
 
   render(){
     return (
-        <Grid>
+        // <Grid>
             <Row>
             {//Iterate through All Sample Data
               this.state.cards.map(card =>{
@@ -26,7 +26,7 @@ class CardContainer extends React.Component {
               })
             }
             </Row>
-        </Grid>
+        // </Grid>
     );
   }
 }

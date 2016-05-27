@@ -6,6 +6,7 @@
 import React from "react";
 import CardContainer from "./CardContainer";
 import Header from "./Header";
+import Gallery from "./Gallery"
 import AddMemberForm from "./AddMemberForm";
 // Main Entry of this app
 class MainEntry extends React.Component {
@@ -14,6 +15,7 @@ class MainEntry extends React.Component {
     this.prepareTestData.bind(this);
     this.state = {
           datas :[]
+          //Login Credential might be included here
     };
   }
 
@@ -27,22 +29,26 @@ class MainEntry extends React.Component {
   // Rendering Method
   render(){
     // Get Data From Server
-    let regis = true;
+    let regis = false;
     this.prepareTestData(22); // Mockup Data
     if(!regis){
         return (
           <div>
-              <h1>Prompt51 Alumni Database</h1>
-            {/*<RegisterNewAlumni></RegisterNewAlumni>
-              <AlumniList></AlumniList>*/}
-              <CardContainer datas = {this.state.datas} ></CardContainer>
+              <Header></Header>
+              {/*<h1 className="overlayTitleText">Prompt51 Alumni Database</h1> Move to Gallery*/}
+              <Gallery></Gallery>
+
+              <div className="container">
+                  <AddMemberForm></AddMemberForm>
+                  <CardContainer datas = {this.state.datas} ></CardContainer>
+              </div>
           </div>
         );
     }else{
       return(
           <div>
-              <Header></Header>
-              <AddMemberForm></AddMemberForm>
+              {//FACEBOOK LOGIN Page
+              }
           </div>
       );
     }

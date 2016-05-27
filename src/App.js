@@ -14,9 +14,9 @@ class App extends React.Component {
   // Rendering Method
   render() {
     return (
-      <div className = "container" >
+      //<div className = "container" >
           <MainEntry/>
-      </div>
+      //</div>
     );
   }
 }
