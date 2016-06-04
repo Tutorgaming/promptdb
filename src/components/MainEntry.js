@@ -31,13 +31,12 @@ class MainEntry extends React.Component {
     // Get Data From Server
     let regis = false;
     this.prepareTestData(22); // Mockup Data
+    
     if(!regis){
         return (
           <div>
-              <Header></Header>
-              {/*<h1 className="overlayTitleText">Prompt51 Alumni Database</h1> Move to Gallery*/}
-              <Gallery></Gallery>
-
+              <Header />
+              <Gallery/>
               <div className="container">
                   <AddMemberForm></AddMemberForm>
                   <CardContainer datas = {this.state.datas} ></CardContainer>
