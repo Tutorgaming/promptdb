@@ -22,3 +22,13 @@
   max-height: 625px;
   transform: scale(1.4) translateX(10%);
 }
+
+.footer-container{
+  margin-top:100px;
+  background: #333;
+  height: 300px;
+}
+
+.carousel-container{
+  margin-bottom: 20px;
+}

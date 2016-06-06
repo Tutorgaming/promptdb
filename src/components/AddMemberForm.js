@@ -48,6 +48,14 @@ class AddMemberForm extends React.Component {
               </FormGroup>
               <br/>
               <FormGroup controlId="formControlsText">
+                  <ControlLabel className ="col-md-4" style={{textAlign:"right",marginTop:9+"px"}}>Student id. / เลขประจำตัวนักเรียน</ControlLabel>
+                      <Col md={4}>
+                          <FormControl type="stdid" placeholder="Enter Student id (2XXXX)" />
+                      </Col>
+                      <Col md={4}/>
+              </FormGroup>
+              <br/>
+              <FormGroup controlId="formControlsText">
                   <ControlLabel className ="col-md-4" style={{textAlign:"right",marginTop:9+"px"}}>E-mail</ControlLabel>
                       <Col md={4}>
                           <FormControl type="email" placeholder="Enter Email" />

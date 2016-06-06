@@ -1,15 +1,18 @@
 /*
   Name : promptDB
-  Main entry Pages Goes here
+  Display List Of All Entries Here
   By : Theppasith N.
 */
 import React from "react";
 import CardContainer from "./CardContainer";
-import Header from "./Header";
-import Gallery from "./Gallery"
 import AddMemberForm from "./AddMemberForm";
+import {PageHeader,Form,Col,Panel,FormGroup, ControlLabel, FormControl} from "react-bootstrap";
+
+// NavBar
+import Header from "./Header";
+
 // Main Entry of this app
-class MainEntry extends React.Component {
+class DisplayAll extends React.Component {
   constructor(props) {
     super(props);
     this.prepareTestData.bind(this);
@@ -17,6 +20,7 @@ class MainEntry extends React.Component {
           datas :[]
           //Login Credential might be included here
     };
+
   }
 
   // Generate Mockup Data
@@ -26,32 +30,27 @@ class MainEntry extends React.Component {
     }
   }
 
+
   // Rendering Method
   render(){
     // Get Data From Server
-    let regis = false;
-    this.prepareTestData(22); // Mockup Data
-    
-    if(!regis){
+      // Not implemented Yet
+    // Generate Mockup Data For Usage
+    this.prepareTestData(22);
+    // Return The Result via html element
         return (
           <div>
               <Header />
-              <Gallery/>
               <div className="container">
-                  <AddMemberForm></AddMemberForm>
+                  <PageHeader>Alumni Display - <small> ข้อมูลศิษย์เก่า     </small>
+                  { (this.props.params.roomId)?  `ห้อง ${this.props.params.roomId}`:"แสดงทั้งหมด"}
+                  </PageHeader>
+                  <hr/>
                   <CardContainer datas = {this.state.datas} ></CardContainer>
               </div>
           </div>
         );
-    }else{
-      return(
-          <div>
-              {//FACEBOOK LOGIN Page
-              }
-          </div>
-      );
-    }
   }
 }
 
-export default MainEntry;
+export default DisplayAll;
