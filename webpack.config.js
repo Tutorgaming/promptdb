@@ -5,6 +5,9 @@ module.exports = {
     },
     devServer:{
       contentBase: "./src",
+      historyApiFallback: {
+        index: 'index.html'
+      },
       inline: true,
       port : 3000
     },
@@ -16,7 +19,6 @@ module.exports = {
           loader: 'babel',
           query:{
               presets: ['es2015','react']
-
           }
       }
     ]
