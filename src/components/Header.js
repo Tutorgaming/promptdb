@@ -11,6 +11,11 @@ import {LinkContainer} from 'react-router-bootstrap';
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
+    let defaultDisplay = (this.props.logged_in)? this.props.logged_in:true ;
+    this.state ={
+      displayFull : defaultDisplay
+    };
+    console.log(props);
   }
 
   render() {
@@ -24,7 +29,7 @@ export default class Header extends React.Component {
               </Navbar.Brand>
                 <Navbar.Toggle />
             </Navbar.Header>
-                <Navbar.Collapse>
+              {(this.state.displayFull)?  <Navbar.Collapse>
                     <Nav>
                           <LinkContainer to="/displayAll"><NavItem eventKey={1}> ดูข้อมูลรวม </NavItem></LinkContainer>
                           <LinkContainer to="/register"><NavItem eventKey={2}>ลงทะเบียน</NavItem></LinkContainer>
@@ -42,14 +47,13 @@ export default class Header extends React.Component {
                             <LinkContainer to="/displayRoom/11"><MenuItem eventKey={3.11}> ห้อง 11 </MenuItem></LinkContainer>
                             <LinkContainer to="/displayRoom/12"><MenuItem eventKey={3.12}> ห้อง 12 </MenuItem></LinkContainer>
                             <LinkContainer to="/displayRoom/EP"><MenuItem eventKey={3.13}> ห้อง EP </MenuItem></LinkContainer>
-                            {/*<MenuItem divider />*/}
                           </NavDropdown>
                     </Nav>
                     <Nav pullRight>
                             <NavItem> fb.loginStatus </NavItem>
                             <NavItem> fb.logoutButton </NavItem>
                     </Nav>
-              </Navbar.Collapse>
+              </Navbar.Collapse> : "" }
         </Navbar>
 
       </div>

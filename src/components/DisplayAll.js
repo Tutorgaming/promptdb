@@ -10,6 +10,7 @@ import {PageHeader,Form,Col,Panel,FormGroup, ControlLabel, FormControl} from "re
 
 // NavBar
 import Header from "./Header";
+import Footer from "./Footer";
 
 // Main Entry of this app
 class DisplayAll extends React.Component {
@@ -20,7 +21,6 @@ class DisplayAll extends React.Component {
           datas :[]
           //Login Credential might be included here
     };
-
   }
 
   // Generate Mockup Data
@@ -29,7 +29,6 @@ class DisplayAll extends React.Component {
       this.state.datas.push(i);
     }
   }
-
 
   // Rendering Method
   render(){
@@ -48,6 +47,7 @@ class DisplayAll extends React.Component {
                   <hr/>
                   <CardContainer datas = {this.state.datas} ></CardContainer>
               </div>
+              <Footer />
           </div>
         );
   }

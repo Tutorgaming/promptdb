@@ -26,10 +26,19 @@ class Card extends React.Component {
         <Thumbnail src="http://www.placehold.it/242x200"  alt="242x200" style={{marginTop: 50 + 'px'}}>
           <center>
               <h3>{this.props.nickname}</h3>
-              <h4>{this.props.firstname}aaaaaaa {this.props.lastname}bbbbbbbb</h4>
+              <h4>{this.props.firstname}สมหมาย {this.props.lastname}นามสกุลไทย</h4>
 
               </center>
-          <p>Description</p>
+              <hr/>
+          <p>ข้อมูลส่วนตัว</p>
+          <p>ชื่อ </p>
+          <p>ชื่อ </p>
+          <p>ชื่อ </p>
+          <p>ชื่อ </p>
+          <p>ชื่อ </p>
+          <p>ชื่อ </p>
+          <p>ชื่อ </p>
+          
           <p>
             <Button bsStyle="primary">Button</Button>&nbsp;
             <Button bsStyle="default">Button</Button>

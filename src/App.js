@@ -16,11 +16,13 @@ import { Col } from 'react-bootstrap';
 import DisplayAll from "./components/DisplayAll";
 import DisplayRegisForm from "./components/DisplayRegisForm";
 import WelcomePage from "./components/WelcomePage";
+import DisplayFacebookLogin from "./components/DisplayFacebookLogin";
 
 // Main Page Rendering
 render(
   <Router history={browserHistory}>
       <Route path="/" component={WelcomePage}/>
+      <Route path="/facebookLogin" component={DisplayFacebookLogin}/>
       <Route path="/register" component={DisplayRegisForm}/>
       <Route path="/displayAll" component={DisplayAll}/>
       <Route path="/displayRoom" component={DisplayAll}>

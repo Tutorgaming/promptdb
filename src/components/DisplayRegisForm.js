@@ -8,7 +8,7 @@ import CardContainer from "./CardContainer";
 import AddMemberForm from "./AddMemberForm";
 // NavBar
 import Header from "./Header";
-
+import Footer from "./Footer";
 // Main Entry of this app
 class DisplayRegisForm extends React.Component {
   constructor(props) {
@@ -22,6 +22,7 @@ class DisplayRegisForm extends React.Component {
               <div className="container">
                   <AddMemberForm/>
               </div>
+              <Footer />
           </div>
         );
   }

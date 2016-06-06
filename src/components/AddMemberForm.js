@@ -18,7 +18,11 @@ class AddMemberForm extends React.Component {
   constructor(props){
     super(props);
     this.state = {}; // Schema Field
+    // Call The Redux To Get Login Infomation
+    // Picture -> Facebook Profile
+
   }
+
   render(){
     return (
         <div>
@@ -34,7 +38,7 @@ class AddMemberForm extends React.Component {
               <FormGroup controlId="formControlsText">
                   <ControlLabel className ="col-md-4" style={{textAlign:"right",marginTop:9+"px"}}>Firstname / ชื่อจริง </ControlLabel>
                       <Col md={4}>
-                          <FormControl type="text" placeholder="Enter Firstname" />
+                          <FormControl ref="firstname_ref" type="text" placeholder="Enter Firstname" value={""} />
                       </Col>
                       <Col md={4}/>
               </FormGroup>
@@ -42,7 +46,7 @@ class AddMemberForm extends React.Component {
               <FormGroup controlId="formControlsText">
                   <ControlLabel className ="col-md-4" style={{textAlign:"right",marginTop:9+"px"}}>Lastname / นามสกุล </ControlLabel>
                       <Col md={4}>
-                          <FormControl type="text" placeholder="Enter Lastname" />
+                          <FormControl ref="lastname_ref" type="text" placeholder="Enter Lastname" value={""} />
                       </Col>
                       <Col md={4}/>
               </FormGroup>
@@ -50,7 +54,7 @@ class AddMemberForm extends React.Component {
               <FormGroup controlId="formControlsText">
                   <ControlLabel className ="col-md-4" style={{textAlign:"right",marginTop:9+"px"}}>Student id. / เลขประจำตัวนักเรียน</ControlLabel>
                       <Col md={4}>
-                          <FormControl type="stdid" placeholder="Enter Student id (2XXXX)" />
+                          <FormControl ref="stdid_ref" type="text" placeholder="Enter Student id (2XXXX)" value={""}></FormControl>
                       </Col>
                       <Col md={4}/>
               </FormGroup>
@@ -58,11 +62,28 @@ class AddMemberForm extends React.Component {
               <FormGroup controlId="formControlsText">
                   <ControlLabel className ="col-md-4" style={{textAlign:"right",marginTop:9+"px"}}>E-mail</ControlLabel>
                       <Col md={4}>
-                          <FormControl type="email" placeholder="Enter Email" />
+                          <FormControl ref="email_ref" type="text" placeholder="Enter Email" value={""} />
                       </Col>
                       <Col md={4}/>
               </FormGroup>
               <br/>
+              <FormGroup controlId="formControlsText">
+                  <ControlLabel className ="col-md-4" style={{textAlign:"right",marginTop:9+"px"}}>สถานที่ทำงาน</ControlLabel>
+                      <Col md={4}>
+                          <FormControl ref="workplace_ref" type="text" placeholder="Enter Workplace" value={""} />
+                      </Col>
+                      <Col md={4}/>
+              </FormGroup>
+              <br/>
+                <FormGroup controlId="formControlsText">
+                    <ControlLabel className ="col-md-4" style={{textAlign:"right",marginTop:9+"px"}}>Contact Number / เบอร์โทรติดต่อ</ControlLabel>
+                        <Col md={4}>
+                            <FormControl ref="phone_ref" type="text" placeholder="Enter Phone No." value={""} />
+                        </Col>
+                        <Col md={4}/>
+                </FormGroup>
+                <br/>
+
           </Panel>
         </div>
 
