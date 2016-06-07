@@ -15,7 +15,7 @@ export default class Header extends React.Component {
     this.state ={
       displayFull : defaultDisplay
     };
-    console.log(props);
+    //console.log(props);
   }
 
   render() {

@@ -1,4 +1,6 @@
-
+body {
+  min-width: 400px;
+}
 @media screen and (min-width: 480px) {
   h1.overlayTitleText{
     color : #ffffff;
@@ -31,4 +33,8 @@
 
 .carousel-container{
   margin-bottom: 20px;
+}
+
+.regisform .row{
+  margin-top:10px;
 }
