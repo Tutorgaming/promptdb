@@ -62,18 +62,21 @@ class DisplayFacebookLogin extends React.Component {
         var fbusername;
         var fbid;
         var picurl;
+        var largepic;
 
         // Fetch user Data
         FB.api('/me', function(response) {
           fbusername = response.name;
           fbid = response.id;
           picurl = "http://graph.facebook.com/" + fbid + "/picture?type=square";
+          largepic = "http://graph.facebook.com/" + fbid + "/picture?type=large";
           this.setState({
             logged_in :true,
             user:{
               'fbusername': fbusername,
               'fbid': fbid,
-              'picurl': ""+picurl
+              'picurl': ""+picurl,
+              'largepic': ""+largepic
             }
           });
         }.bind(this));
@@ -91,11 +94,14 @@ class DisplayFacebookLogin extends React.Component {
     }
     return (
       <div>
-        <Header logged_in={false}/>
+        {(this.state.logged_in)?  <Header logged_in={this.state.logged_in} user={profile}/> :
+          <Header logged_in={false}/>
+          }
+
           <center>
             <div className="container">
               <Panel bsStyle="primary" header="Login With Facebook / กรุณา Login ด้วย Facebook ">
-                  {(this.state.logged_in)? <div><img src={profile.picurl}/> <br/> {profile.fbusername}</div>
+                  {(this.state.logged_in)? <div><img src={profile.largepic}/> <br/> {profile.fbusername}</div>
                 :
                 <FacebookLogin
                   appId="1121025771269670"

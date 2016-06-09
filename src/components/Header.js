@@ -7,15 +7,17 @@ import React, {PropTypes} from 'react';
 import {Nav,Navbar, NavItem , NavDropdown , MenuItem} from "react-bootstrap";
 import Gallery from "./Gallery";
 import {LinkContainer} from 'react-router-bootstrap';
-
+import { connect } from 'react-redux'
 export default class Header extends React.Component {
   constructor(props) {
     super(props);
-    let defaultDisplay = (this.props.logged_in)? this.props.logged_in:true ;
-    this.state ={
-      displayFull : defaultDisplay
-    };
-    //console.log(props);
+  }
+  fbLogout() {
+        FB.logout(function (response) {
+            // Set Login State in Global Store
+            // logged_in : false
+            window.location.reload();
+        });
   }
 
   render() {
@@ -29,7 +31,7 @@ export default class Header extends React.Component {
               </Navbar.Brand>
                 <Navbar.Toggle />
             </Navbar.Header>
-              {(this.state.displayFull)?  <Navbar.Collapse>
+              {(this.props.logged_in)?  <Navbar.Collapse>
                     <Nav>
                           <LinkContainer to="/displayAll"><NavItem eventKey={1}> ดูข้อมูลรวม </NavItem></LinkContainer>
                           <LinkContainer to="/register"><NavItem eventKey={2}>ลงทะเบียน</NavItem></LinkContainer>
@@ -50,8 +52,8 @@ export default class Header extends React.Component {
                           </NavDropdown>
                     </Nav>
                     <Nav pullRight>
-                            <NavItem> fb.loginStatus </NavItem>
-                            <NavItem> fb.logoutButton </NavItem>
+                            <NavItem> <img src={this.props.user.picurl} style={{width: 20+'px',height: 20+'px'}} /> </NavItem>
+                            <NavItem> <span onClick={this.fbLogout.bind(this)}>logout</span> </NavItem>
                     </Nav>
               </Navbar.Collapse> : "" }
         </Navbar>
