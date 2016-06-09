@@ -6,7 +6,7 @@
 import React from 'react';
 import FacebookLogin from 'react-facebook-login';
 import Footer from './Footer'
-import {Panel} from 'react-bootstrap'
+import {Panel, Button} from 'react-bootstrap'
 import Header from './Header'
 
 class DisplayFacebookLogin extends React.Component {
@@ -17,6 +17,8 @@ class DisplayFacebookLogin extends React.Component {
       this.handleAuthStatus = this.handleAuthStatus.bind(this);
       // Init the facebook API
       this.initialFacebookSDK();
+
+      // Maintained Login State (Test Purpose)
       this.state = {
         logged_in: false,
         user:{
@@ -25,6 +27,7 @@ class DisplayFacebookLogin extends React.Component {
           fbid: ''
         }
       };
+
   }
 
   initialFacebookSDK(){
@@ -79,10 +82,18 @@ class DisplayFacebookLogin extends React.Component {
               'largepic': ""+largepic
             }
           });
+          // Do Something After We got the Auth Param
         }.bind(this));
       }
       else {
+        // No Authentication credential
+        // Do nothing
       }
+  }
+
+  doAuthen(){
+      console.log("Do the Firebase Authentication");
+
   }
 
 
@@ -92,9 +103,11 @@ class DisplayFacebookLogin extends React.Component {
     if(this.state.logged_in){
       profile = this.state.user;
     }
+
     return (
       <div>
-        {(this.state.logged_in)?  <Header logged_in={this.state.logged_in} user={profile}/> :
+        {(this.state.logged_in)?
+          <Header logged_in={this.state.logged_in} user={profile}/> :
           <Header logged_in={false}/>
           }
 
@@ -110,6 +123,10 @@ class DisplayFacebookLogin extends React.Component {
                   autoLoad={false}
                   callback={this.responseFacebook}/>
               }
+
+            <br/>
+              <Button onClick={this.doAuthen.bind(this)} bsStyle="warning"> warning </Button>
+
               </Panel>
 
               </div>
@@ -122,30 +139,4 @@ class DisplayFacebookLogin extends React.Component {
 
 export default DisplayFacebookLogin;
 
-//
-// import React from "react";
-// import FacebookLogin from 'react-facebook-login';
-//
-// class DisplayFacebookLogin extends React.Component {
-//   constructor(props) {
-//       super(props)
-//   };
-//
-//   // Tip: Usage of Arrow Function in order to get to the Scope This
-//   var facebookResponseCallback = (response) => {
-//     console.log(response);
-//   };
-//
-//   render(){
-//     return(
-//       <FacebookLogin
-//             appId="1121025771269670"
-//             size={medium}
-//             autoLoad={true}
-//             callback={facebookResponseCallback}
-//         />
-//     );
-//   }
-// }
-//
-// export default DisplayFacebookLogin;
+//Connect To Store to keep the Data Here

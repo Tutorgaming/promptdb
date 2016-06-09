@@ -65,6 +65,8 @@ module.export ={
                 }
             );
   				} else {
+            console.log("Auth Success");
+            console.log(authData);
   					// Authentication Success
   				}
   			});
