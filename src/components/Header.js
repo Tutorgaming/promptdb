@@ -31,7 +31,7 @@ export default class Header extends React.Component {
               </Navbar.Brand>
                 <Navbar.Toggle />
             </Navbar.Header>
-              {(this.props.logged_in)?  <Navbar.Collapse>
+              {(this.props.auth.logged_in)?  <Navbar.Collapse>
                     <Nav>
                           <LinkContainer to="/displayAll"><NavItem eventKey={1}> ดูข้อมูลรวม </NavItem></LinkContainer>
                           <LinkContainer to="/register"><NavItem eventKey={2}>ลงทะเบียน</NavItem></LinkContainer>
@@ -52,7 +52,7 @@ export default class Header extends React.Component {
                           </NavDropdown>
                     </Nav>
                     <Nav pullRight>
-                            <NavItem> <img src={this.props.user.picurl} style={{width: 20+'px',height: 20+'px'}} /> </NavItem>
+                            <NavItem> <img src={this.props.auth.picurl} style={{width: 20+'px',height: 20+'px'}} /> </NavItem>
                             <NavItem> <span onClick={this.fbLogout.bind(this)}>logout</span> </NavItem>
                     </Nav>
               </Navbar.Collapse> : "" }
@@ -64,3 +64,10 @@ export default class Header extends React.Component {
     );
   }
 }
+
+var mapStateToProps = function(appState){
+	// This component will have access to `appState.auth` through `this.props.auth`
+	return {auth:appState.auth};
+};
+
+module.exports = connect(mapStateToProps)(Header);

@@ -8,6 +8,8 @@ import FacebookLogin from 'react-facebook-login';
 import Footer from './Footer'
 import {Panel, Button} from 'react-bootstrap'
 import Header from './Header'
+import * as authen_action from '../redux/actions/auth'
+import {connect} from 'react-redux';
 
 class DisplayFacebookLogin extends React.Component {
   constructor(props) {
@@ -20,14 +22,8 @@ class DisplayFacebookLogin extends React.Component {
 
       // Maintained Login State (Test Purpose)
       this.state = {
-        logged_in: false,
-        user:{
-          fbusername: '',
-          picurl: '',
-          fbid: ''
-        }
+        loca : false
       };
-
   }
 
   initialFacebookSDK(){
@@ -53,10 +49,10 @@ class DisplayFacebookLogin extends React.Component {
   }
 
   responseFacebook(res){
-    // Check Login
-    FB.getLoginStatus(function(response) {
-        this.handleAuthStatus(response);
-      }.bind(this));
+      // Check Login
+      FB.getLoginStatus(function(response) {
+          this.handleAuthStatus(response);
+        }.bind(this));
   }
 
   handleAuthStatus(response){
@@ -66,7 +62,8 @@ class DisplayFacebookLogin extends React.Component {
         var fbid;
         var picurl;
         var largepic;
-
+        console.log("res");
+        console.log(response);
         // Fetch user Data
         FB.api('/me', function(response) {
           fbusername = response.name;
@@ -86,35 +83,41 @@ class DisplayFacebookLogin extends React.Component {
         }.bind(this));
       }
       else {
-        // No Authentication credential
-        // Do nothing
       }
   }
 
   doAuthen(){
       console.log("Do the Firebase Authentication");
+      //this.props.attemptLogin();
+      this.props.startListeningToAuth();
+
+      // Router Push to Welcome Page (SHOULD HAVE THE DATA PROVIDED FROM HERE)
+  }
+
+  componentWillReceiveProps(){
+    console.log("NEW PROP DETECT");
+  }
+
+  componentDidMount(){
+    console.log("Component Did Mount");
 
   }
 
 
   render() {
-
-    var profile;
-    if(this.state.logged_in){
-      profile = this.state.user;
-    }
-
     return (
       <div>
-        {(this.state.logged_in)?
-          <Header logged_in={this.state.logged_in} user={profile}/> :
+          {
+          (this.props.auth.logged_in)?
+          <Header logged_in={this.props.auth.logged_in} user={this.props.auth}/>
+          :
           <Header logged_in={false}/>
           }
 
           <center>
             <div className="container">
               <Panel bsStyle="primary" header="Login With Facebook / กรุณา Login ด้วย Facebook ">
-                  {(this.state.logged_in)? <div><img src={profile.largepic}/> <br/> {profile.fbusername}</div>
+                  {(this.props.auth.logged_in)? <div><img src={this.props.auth.largepic}/> <br/> {this.props.auth.fbusername}</div>
                 :
                 <FacebookLogin
                   appId="1121025771269670"
@@ -125,8 +128,7 @@ class DisplayFacebookLogin extends React.Component {
               }
 
             <br/>
-              <Button onClick={this.doAuthen.bind(this)} bsStyle="warning"> warning </Button>
-
+              <Button onClick={this.doAuthen.bind(this)} bsStyle="warning"> Login-Firebase </Button>
               </Panel>
 
               </div>
@@ -140,3 +142,20 @@ class DisplayFacebookLogin extends React.Component {
 export default DisplayFacebookLogin;
 
 //Connect To Store to keep the Data Here
+
+
+var mapStateToProps = function(appState){
+	// This component will have access to `appState.auth` through `this.props.auth`
+	return {auth:appState.auth};
+};
+
+var mapDispatchToProps = function(dispatch){
+	return {
+		attemptLogin: function(){ dispatch(authen_action.attemptLogin()); },
+    startListeningToAuth: function() {dispatch(authen_action.startListeningToAuth());},
+    sayHello: function(){ dispatch(authen_action.sayHello());},
+		logoutUser: function(){ dispatch(authen_action.logoutUser()); }
+	}
+};
+
+module.exports = connect(mapStateToProps,mapDispatchToProps)(DisplayFacebookLogin);

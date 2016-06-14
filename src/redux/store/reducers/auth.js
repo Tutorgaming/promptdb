@@ -25,8 +25,16 @@ module.exports = function(currentstate,action){
 			return {
 				currently: ENUM.LOGGED_IN,
 				username: action.username,
-				uid: action.uid
+				uid: action.uid,
+				fbusername: action.fbusername,
+				fbid:action.fbid,
+				logged_in: action.logged_in,
+				largepic: action.largepic,
+				picurl: action.picurl
 			};
+		case ENUM.HELLO:
+			console.log("SJFIOAJFIOADJFOAJDFOAIDJFAODIFJAODIFJAOIDJF");
+		 	return;
 		default: return currentstate || initialState.auth;
 	}
 };

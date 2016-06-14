@@ -4,11 +4,13 @@
   By : Theppasith N.
 */
 
-import React from "react";
-import { render } from 'react-dom';
+import React            from "react";
+import { createStore }  from 'redux';
+import { Provider }     from 'react-redux';
+import { render }       from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute} from "react-router";
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
+import { syncHistoryWithStore, routerReducer }      from 'react-router-redux'
+
 
 //React Bootstrap Components
 import { Col } from 'react-bootstrap';
@@ -23,14 +25,17 @@ import DisplayFacebookLogin from "./components/DisplayFacebookLogin";
   // Import Constants
   import * as ENUM from "./redux/constants";
   // Create Store
-  let store = ''//import * as store from "./redux/store";
+  import * as store from "./redux/store";
+  //let store = ''//
 
+  // Create an enhanced history that syncs navigation events with the store
+  const history = syncHistoryWithStore(browserHistory, store)
 
 
 // Main Page Rendering
 render(
   <Provider store={store}>
-  <Router history={browserHistory}>
+  <Router history={history}>
       <Route path="/" component={WelcomePage}/>
       <Route path="/facebookLogin" component={DisplayFacebookLogin}/>
       <Route path="/register" component={DisplayRegisForm}/>

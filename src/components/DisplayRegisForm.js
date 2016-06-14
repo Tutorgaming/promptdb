@@ -6,6 +6,7 @@
 import React from "react";
 import CardContainer from "./CardContainer";
 import AddMemberForm from "./AddMemberForm";
+import {connect} from "react-redux";
 // NavBar
 import Header from "./Header";
 import Footer from "./Footer";
@@ -20,7 +21,7 @@ class DisplayRegisForm extends React.Component {
           <div>
               <Header />
               <div className="container">
-                  <AddMemberForm/>
+                  <AddMemberForm user = {this.props.auth}/>
               </div>
               <Footer />
           </div>
@@ -29,3 +30,12 @@ class DisplayRegisForm extends React.Component {
 }
 
 export default DisplayRegisForm;
+
+
+var mapStateToProps = function(appState){
+	// This component will have access to `appState.auth` through `this.props.auth`
+	return {auth:appState.auth};
+};
+
+
+module.exports = connect(mapStateToProps)(DisplayRegisForm);

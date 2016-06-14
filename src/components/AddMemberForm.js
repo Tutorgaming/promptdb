@@ -10,7 +10,10 @@ import {Button, PageHeader,Form,Col,Panel,FormGroup, ControlLabel, FormControl} 
 class AddMemberForm extends React.Component {
   constructor(props){
     super(props);
-    this.state = { form : {} }; // Schema Field
+    this.state = {
+      form : {} ,
+      facebook : this.props.user
+    }; // Schema Field
     // Call The Redux To Get Login Infomation
     // Picture -> Facebook Profile
 
@@ -43,7 +46,7 @@ class AddMemberForm extends React.Component {
           <hr/>
           <Panel bsStyle="primary">
             <Panel bsStyle="primary" header="Facebook Login Status">
-                <h2>Facebook Login Status : </h2>
+                <h2>Facebook Login Status : {this.state.facebook.fbusername} </h2>
             </Panel>
 
           <h3>Registration Form</h3>

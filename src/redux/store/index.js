@@ -3,6 +3,28 @@
 
 */
 
+import * as Redux from 'redux';
+//import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
+import rootReducer from './reducers';
+import initialState from './initialstate'
+import thunk from 'redux-thunk'
+
+
+// A super-simple logger
+var logger = store => next => action => {
+	console.log('dispatching', action.type,action)
+	var result = next(action)
+	console.log('next state', store.getState())
+	return result
+}
+
+
+module.exports = Redux.applyMiddleware(thunk,logger)(Redux.createStore)(rootReducer,initialState);
+
+
+
+///////
 /*
 var Redux = require("redux"),
 	rootReducer = require("./reducers"),
@@ -21,6 +43,10 @@ var logger = store => next => action => {
 
 module.exports = Redux.applyMiddleware(thunk,logger)(Redux.createStore)(rootReducer,initialState);
 */
+
+
+
+
 /*
 import { createStore, compose, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
@@ -42,8 +68,10 @@ const store = compose(
     applyMiddleware(thunkMiddleware, loggerMiddleware)
 )(createStore)(rootReducer, initialState);
 
-export default store;*/
+export default store;
+*/
 
+/*
 import { applyMiddleware, createStore } from 'redux';
 import rootReducer from './reducers';
 import thunk from 'redux-thunk';
@@ -58,4 +86,4 @@ if (process.env.NODE_ENV === 'development') {
 
 const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
 const store = createStoreWithMiddleware(rootReducer);
-export default store;
+export default store;*/

@@ -8,6 +8,11 @@ module.exports = {
 	auth: {
 		currently: C.ANONYMOUS,
 		username: null,
-		uid: null
+		uid: null,
+		fbusername: null,
+		fbid:null,
+		logged_in: false,
+		largepic: null,
+		picurl: null
 	}
 };
