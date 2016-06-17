@@ -26,11 +26,9 @@ import DisplayFacebookLogin from "./components/DisplayFacebookLogin";
   import * as ENUM from "./redux/constants";
   // Create Store
   import * as store from "./redux/store";
-  //let store = ''//
 
   // Create an enhanced history that syncs navigation events with the store
   const history = syncHistoryWithStore(browserHistory, store)
-
 
 // Main Page Rendering
 render(
@@ -40,6 +38,7 @@ render(
       <Route path="/facebookLogin" component={DisplayFacebookLogin}/>
       <Route path="/register" component={DisplayRegisForm}/>
       <Route path="/displayAll" component={DisplayAll}/>
+      <Route path="/displayEdit" component={WelcomePage}/>
       <Route path="/displayRoom" component={DisplayAll}>
           <Route path="/displayRoom/:roomId" component={DisplayAll}/>
       </Route>

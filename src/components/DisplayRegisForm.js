@@ -20,9 +20,13 @@ class DisplayRegisForm extends React.Component {
         return (
           <div>
               <Header />
-              <div className="container">
-                  <AddMemberForm user = {this.props.auth}/>
-              </div>
+                  <div className="container">
+                  {(this.props.member.registered)?
+                    <div> REGISTER SUCCESS !  </div>
+                        :
+                    <AddMemberForm user = {this.props.auth}/>
+                  }
+                  </div>
               <Footer />
           </div>
         );
@@ -34,7 +38,7 @@ export default DisplayRegisForm;
 
 var mapStateToProps = function(appState){
 	// This component will have access to `appState.auth` through `this.props.auth`
-	return {auth:appState.auth};
+	return {auth:appState.auth,member:appState.member};
 };
 
 

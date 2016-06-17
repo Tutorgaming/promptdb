@@ -14,16 +14,8 @@ import {connect} from 'react-redux';
 class DisplayFacebookLogin extends React.Component {
   constructor(props) {
       super(props);
-      // Bind To Non-React Object
-      this.responseFacebook = this.responseFacebook.bind(this);
-      this.handleAuthStatus = this.handleAuthStatus.bind(this);
       // Init the facebook API
       this.initialFacebookSDK();
-
-      // Maintained Login State (Test Purpose)
-      this.state = {
-        loca : false
-      };
   }
 
   initialFacebookSDK(){
@@ -48,61 +40,11 @@ class DisplayFacebookLogin extends React.Component {
       }(document, 'script', 'facebook-jssdk'));
   }
 
-  responseFacebook(res){
-      // Check Login
-      FB.getLoginStatus(function(response) {
-          this.handleAuthStatus(response);
-        }.bind(this));
-  }
-
-  handleAuthStatus(response){
-    if(response.status == "connected") {
-        var parent = this;
-        var fbusername;
-        var fbid;
-        var picurl;
-        var largepic;
-        console.log("res");
-        console.log(response);
-        // Fetch user Data
-        FB.api('/me', function(response) {
-          fbusername = response.name;
-          fbid = response.id;
-          picurl = "http://graph.facebook.com/" + fbid + "/picture?type=square";
-          largepic = "http://graph.facebook.com/" + fbid + "/picture?type=large";
-          this.setState({
-            logged_in :true,
-            user:{
-              'fbusername': fbusername,
-              'fbid': fbid,
-              'picurl': ""+picurl,
-              'largepic': ""+largepic
-            }
-          });
-          // Do Something After We got the Auth Param
-        }.bind(this));
-      }
-      else {
-      }
-  }
-
   doAuthen(){
       console.log("Do the Firebase Authentication");
-      //this.props.attemptLogin();
+      //Emit the Auth Action
       this.props.startListeningToAuth();
-
-      // Router Push to Welcome Page (SHOULD HAVE THE DATA PROVIDED FROM HERE)
   }
-
-  componentWillReceiveProps(){
-    console.log("NEW PROP DETECT");
-  }
-
-  componentDidMount(){
-    console.log("Component Did Mount");
-
-  }
-
 
   render() {
     return (
@@ -117,18 +59,24 @@ class DisplayFacebookLogin extends React.Component {
           <center>
             <div className="container">
               <Panel bsStyle="primary" header="Login With Facebook / กรุณา Login ด้วย Facebook ">
-                  {(this.props.auth.logged_in)? <div><img src={this.props.auth.largepic}/> <br/> {this.props.auth.fbusername}</div>
-                :
-                <FacebookLogin
-                  appId="1121025771269670"
-                  size="metro"
-                  scope={"public_profile","email"}
-                  autoLoad={false}
-                  callback={this.responseFacebook}/>
-              }
+                  {(this.props.auth.logged_in)?
+                    <div>
+                        <img src={this.props.auth.largepic}/>
+                        <br/> {this.props.auth.fbusername}
+                    </div>
+                  :
+                  ""
+                 }
 
-            <br/>
-              <Button onClick={this.doAuthen.bind(this)} bsStyle="warning"> Login-Firebase </Button>
+                  <br/>
+
+                {(!this.props.auth.logged_in)?
+                  <Button onClick={this.doAuthen.bind(this)} bsStyle="primary">
+                      Login with Facebook
+                  </Button>
+                  :
+                  ""
+                }
               </Panel>
 
               </div>
@@ -140,9 +88,6 @@ class DisplayFacebookLogin extends React.Component {
 }
 
 export default DisplayFacebookLogin;
-
-//Connect To Store to keep the Data Here
-
 
 var mapStateToProps = function(appState){
 	// This component will have access to `appState.auth` through `this.props.auth`

@@ -34,7 +34,10 @@ export default class Header extends React.Component {
               {(this.props.auth.logged_in)?  <Navbar.Collapse>
                     <Nav>
                           <LinkContainer to="/displayAll"><NavItem eventKey={1}> ดูข้อมูลรวม </NavItem></LinkContainer>
-                          <LinkContainer to="/register"><NavItem eventKey={2}>ลงทะเบียน</NavItem></LinkContainer>
+                        {(this.props.member.registered)?
+                          <LinkContainer to="/displayEdit"><NavItem eventKey={2}>แก้ไขข้อมูลส่วนตัว</NavItem></LinkContainer>
+                          : <LinkContainer to="/register"><NavItem eventKey={2}>ลงทะเบียน</NavItem></LinkContainer>
+                        }
                           <NavDropdown eventKey={3} title="ดูข้อมูลศิษย์เก่า" id="basic-nav-dropdown">
                             <LinkContainer to="/displayRoom/1"><MenuItem eventKey={3.1}> ห้อง 1 </MenuItem></LinkContainer>
                             <LinkContainer to="/displayRoom/2"><MenuItem eventKey={3.2}> ห้อง 2 </MenuItem></LinkContainer>
@@ -55,7 +58,12 @@ export default class Header extends React.Component {
                             <NavItem> <img src={this.props.auth.picurl} style={{width: 20+'px',height: 20+'px'}} /> </NavItem>
                             <NavItem> <span onClick={this.fbLogout.bind(this)}>logout</span> </NavItem>
                     </Nav>
-              </Navbar.Collapse> : "" }
+              </Navbar.Collapse>
+              :
+              <Nav pullRight>
+                      <LinkContainer to="/facebookLogin"><NavItem>Login with Facebook</NavItem></LinkContainer>
+              </Nav>
+            }
         </Navbar>
 
       </div>
@@ -67,7 +75,7 @@ export default class Header extends React.Component {
 
 var mapStateToProps = function(appState){
 	// This component will have access to `appState.auth` through `this.props.auth`
-	return {auth:appState.auth};
+	return {auth:appState.auth , member:appState.member};
 };
 
 module.exports = connect(mapStateToProps)(Header);

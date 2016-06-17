@@ -1,5 +1,5 @@
 /*
-  Name : React Playground
+  Name : promptdb
   Authentication Action
   Based on Firebase
   By : Theppasith N.
@@ -8,8 +8,8 @@
 import * as ENUM from '../constants';
 import firebase from 'firebase';
 
-const fireRef = firebase.initializeApp(ENUM.FIREBASE_CONFIG);
-
+export var fireRef = firebase.initializeApp(ENUM.FIREBASE_CONFIG);
+console.log("init");
 module.exports ={
   // Check Existing Authentication
   startListeningToAuth: function(){
@@ -34,27 +34,6 @@ module.exports ={
             }
           );
       });
-      /*
-      fireRef.onAuth(function(authData){
-        if(authData){
-            console.log(authData);
-            dispatch(
-              {
-                type: ENUM.LOGIN_USER,
-                uid: authData.uid,
-                username: authData.facebook.displayName
-              }
-            );
-        }else{
-          if(getState().auth.currently !== ENUM.ANONYMOUS){
-              dispatch(
-                  {
-                    type: ENUM.LOGOUT
-                  }
-              );
-          }
-        }
-      })*/
     }
   }
   ,
@@ -81,28 +60,6 @@ module.exports ={
           var credential = error.credential;
 
         });
-
-
-  			/*fireRef.authWithOAuthPopup("facebook", function(error, authData) {
-  				if (error) {
-            // Do the Error Display
-            dispatch(
-                {
-                  type:ENUM.DISPLAY_ERROR,error:"Login failed! "+error
-                }
-            );
-            // Error => Logout
-  					dispatch(
-                {
-                  type:ENUM.LOGOUT
-                }
-            );
-  				} else {
-            console.log("Auth Success");
-            console.log(authData);
-  					// Authentication Success
-  				}
-  			});*/
 		}
 	}
   ,
