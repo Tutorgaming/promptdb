@@ -11,6 +11,7 @@ import {fireRef} from './auth'
 // var fireRef = firebase.initializeApp(ENUM.FIREBASE_CONFIG);
 const database = firebase.database();
 const memberDatabase = database.ref('members');
+
 module.exports = {
   //Save a Single Member onto Database
   saveMember: function(formData){
@@ -50,15 +51,29 @@ module.exports = {
                     message: "Post Member to Database Successfully."
                   });
                   // Redirect To
-                    
+
               }
           });
-
       }
   },
   helloWorld: function(){
     return function(dispatch,getState){
       console.log("Hello World from Member Moudules");
+    }
+  },
+  fetchMember: function(memberid){
+    return function(dispatch,getState){
+      var member = {
+        id           : null,
+        firstname    : null,
+        lastname     : null,
+        room         : null,
+        email        : null,
+        workplace    : null,
+        phone        : null,
+        facebook_id  : null
+      };
+
     }
   }
 }

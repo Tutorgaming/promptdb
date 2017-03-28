@@ -33,9 +33,6 @@ class AddMemberForm extends React.Component {
   }
 
   handleFormSubmit(){
-    //alert(this.state.form);
-    // Call Action  saveMember(formData)
-    // inside action->dispatch
     console.log("SUBMITTING! ");
     this.props.saveMember(this.state.form);
 

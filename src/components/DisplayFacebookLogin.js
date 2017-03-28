@@ -67,7 +67,6 @@ class DisplayFacebookLogin extends React.Component {
                   :
                   ""
                  }
-
                   <br/>
 
                 {(!this.props.auth.logged_in)?
